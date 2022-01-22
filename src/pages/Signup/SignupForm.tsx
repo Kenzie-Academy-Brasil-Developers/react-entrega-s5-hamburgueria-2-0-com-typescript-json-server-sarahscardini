@@ -1,0 +1,101 @@
+import { Box, Button, Grid, Heading, Text, VStack } from "@chakra-ui/react";
+import { Input } from "../../components/Input";
+import { theme } from "../../styles/theme";
+
+import { useHistory } from "react-router-dom";
+import {
+  DeepMap,
+  FieldError,
+  FieldValues,
+  UseFormRegister,
+} from "react-hook-form";
+
+interface SignUpData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPass: string;
+}
+
+interface LoginFormProps {
+  handleSignUp: () => void;
+  errors: DeepMap<FieldValues, FieldError>;
+  register: UseFormRegister<SignUpData>;
+}
+
+export const SigupForm = ({
+  handleSignUp,
+  errors,
+  register,
+}: LoginFormProps) => {
+  const history = useHistory();
+
+  return (
+    <Grid
+      as="form"
+      onSubmit={handleSignUp}
+      padding={["10px 15px", "10px 15px", "15px 20px", "15px 20px"]}
+      border={`2px solid ${theme.colors.grey["0"]}`}
+      boxShadow="0px 0px 30px -20px rgba(0, 0, 0, 0.25)"
+      borderRadius="5px"
+      maxW="500px"
+      maxH="527px"
+      minHeight="527px"
+      w={["100%", "100%", "48vw", "48vw"]}
+      h="70vh"
+      alignContent="space-evenly"
+    >
+      <Box display="inline-flex" justifyContent="space-between">
+        <Heading as="h2" fontSize="18px">
+          Cadastro
+        </Heading>
+        <Text
+          color={theme.colors.grey["300"]}
+          fontSize="14px"
+          textDecor="underline"
+          w="fit-content"
+          _hover={{ color: theme.colors.grey["600"] }}
+          onClick={() => history.push("/")}
+          cursor="pointer"
+        >
+          Retornar para o login
+        </Text>
+      </Box>
+      <VStack spacing="4">
+        <Input placeholder="Nome" error={errors.name} {...register("name")} />
+        <Input
+          placeholder="Email"
+          type="email"
+          error={errors.email}
+          {...register("email")}
+        />
+        <Input
+          placeholder="Senha"
+          type="password"
+          error={errors.password}
+          {...register("password")}
+        />
+        <Input
+          placeholder="Confirmar Senha"
+          type="password"
+          error={errors.confirmPass}
+          {...register("confirmPass")}
+        />
+        <Button
+          type="submit"
+          bg={theme.colors.grey["0"]}
+          borderRadius="8px"
+          color={theme.colors.grey["300"]}
+          h="60px"
+          w="100%"
+          _hover={{
+            bg: theme.colors.grey["300"],
+            color: theme.colors.grey["100"],
+          }}
+        >
+          Cadastrar
+        </Button>
+      </VStack>
+    </Grid>
+  );
+};
