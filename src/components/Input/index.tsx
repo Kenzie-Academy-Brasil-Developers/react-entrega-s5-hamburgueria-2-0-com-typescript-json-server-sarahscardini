@@ -58,18 +58,18 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   return (
     <FormControl isInvalid={!!error}>
       <ChakraInput
-        id={name}
         bg={!value ? theme.colors.grey["0"] : "white"}
         borderColor={inputVariation[variation]}
         boxShadow={`0 0 0 1px ${inputVariation[variation]}`}
         color={theme.colors.grey["600"]}
+        fontSize="14px"
         h="60px"
+        id={name}
         name={name}
         onBlurCapture={handleInputBlur}
         onChangeCapture={(e) => setValue(e.currentTarget.value)}
         onFocus={handleInputFocus}
         ref={ref}
-        fontSize="14px"
         variant="outline"
         _focus={{ bg: "white" }}
         _hover={{ bgColor: theme.colors.grey["0"] }}
