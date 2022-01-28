@@ -1,21 +1,37 @@
 import { Button, Flex, Heading, Img, Text, VStack } from "@chakra-ui/react";
-import { useState } from "react";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { theme } from "../../styles/theme";
 import { IconBase } from "../IconBase";
+import { Product } from "../../types/Product";
+import { theme } from "../../styles/theme";
+import { useProductsProvider } from "../../providers/ProductsContext";
+import { useState } from "react";
+import { useUserProvider } from "../../providers/UserContext";
 
-export const Card = () => {
+interface CardProps {
+  product: Product;
+}
+
+export const Card = ({ product }: CardProps) => {
   const [click, setClick] = useState<boolean>(false);
+  const { cartProducts, addOneToCart, addToCart } = useProductsProvider();
+
+  const { accessToken, user } = useUserProvider();
+
+  const handleAddToCart = () => {
+    cartProducts.length === 0
+      ? addToCart(product, Number(user.id), accessToken)
+      : addOneToCart(product, Number(user.id), accessToken, false);
+  };
 
   return (
     <Flex
-      flexDir="column"
       alignItems="flex-start"
       bg="white"
-      borderRadius="5px"
       border={`2px solid ${theme.colors.grey["100"]}`}
-      w="300px"
+      borderRadius="5px"
+      flexDir="column"
       h="350px"
+      w="300px"
       _hover={{
         borderColor: theme.colors.primaryPalette.primary,
         transform: "scale(1.1)",
@@ -33,55 +49,52 @@ export const Card = () => {
       }}
     >
       <Flex
+        alignItems="center"
         bg={theme.colors.grey["0"]}
-        w="100%"
         h="50%"
         justifyContent="center"
-        alignItems="center"
+        w="100%"
       >
-        <Img
-          src="https://i.ibb.co/fpVHnZL/hamburguer.png"
-          width="auto"
-          h="90%"
-        />
+        <Img src={product.img} width="auto" h="90%" />
       </Flex>
       <VStack
-        h="50%"
-        m="15px"
         alignItems="flex-start"
+        h="50%"
         justifyContent="space-evenly"
+        m="15px"
         w="85%"
       >
         <Flex justifyContent="space-between" w="100%">
           <Heading as="h2" fontSize="18px" color={theme.colors.grey["600"]}>
-            Hamburguer
+            {product.name}
           </Heading>
           <IconBase
-            onClick={() => setClick(!click)}
             icon={click ? FaHeart : FaRegHeart}
-            label="Adicionar aos favoritos"
             isGreen={true}
+            label="Adicionar aos favoritos"
+            onClick={() => setClick(!click)}
           />
         </Flex>
         <Text fontSize="12px" color={theme.colors.grey["300"]}>
-          Sanduíches
+          {product.category}
         </Text>
         <Text
           color={theme.colors.primaryPalette.primary}
-          fontWeight="semibold"
           fontSize="14px"
+          fontWeight="semibold"
         >
           {Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-          }).format(14.5)}
+          }).format(product.price)}
         </Text>
 
         <Button
           bg={theme.colors.grey["150"]}
-          color="white"
           borderRadius="8px"
+          color="white"
           h="40px"
+          onClick={() => handleAddToCart()}
           w="106px"
           _hover={{ bg: theme.colors.primaryPalette.primary }}
         >
