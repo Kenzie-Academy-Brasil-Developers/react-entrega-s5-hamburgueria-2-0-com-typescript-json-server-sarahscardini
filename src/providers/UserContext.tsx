@@ -46,11 +46,11 @@ interface UserContextData {
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
 
-const useProvider = () => {
+const useUserProvider = () => {
   const context = useContext(UserContext);
 
   if (!context) {
-    throw new Error("O hook useProvider precisa do UserLogProvider");
+    throw new Error("The hook useUserProvider needs UserLogProvider");
   } else {
     return context;
   }
@@ -128,4 +128,4 @@ const UserLogProvider = ({ children }: UserLogProviderProps) => {
   );
 };
 
-export { UserLogProvider, useProvider };
+export { UserLogProvider, useUserProvider };
