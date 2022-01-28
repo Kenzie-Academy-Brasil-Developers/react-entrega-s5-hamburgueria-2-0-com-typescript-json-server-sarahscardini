@@ -6,18 +6,36 @@ import {
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { theme } from "../../styles/theme";
+import { useForm } from "react-hook-form";
+import { useProductsProvider } from "../../providers/ProductsContext";
+import { useUserProvider } from "../../providers/UserContext";
+
+interface SearchItem {
+  itemTitle: string;
+}
 
 export const SearchInput = () => {
-  const handleSearch = () => {};
+  const { searchItem } = useProductsProvider();
+  const { accessToken } = useUserProvider();
+  
+  const { register, handleSubmit, reset } = useForm<SearchItem>();
+  
+  const handleSearch = ({ itemTitle }: SearchItem) => {
+    searchItem(itemTitle, accessToken);
+    reset()
+  };
+
 
   return (
     <InputGroup
       alignItems="center"
+      as="form"
       display="flex"
       justifyContent="center"
-      minW="220px"
-      w="32vw"
       maxW="365px"
+      minW="220px"
+      onSubmit={handleSubmit(handleSearch)}
+      w="32vw"
     >
       <ChackraInput
         bg="white"
@@ -28,27 +46,27 @@ export const SearchInput = () => {
         focusBorderColor={theme.colors.grey["600"]}
         fontSize="14px"
         h="60px"
-        name="Search"
         padding="8px"
         placeholder="Digitar pesquisa"
         variant="outline"
+        {...register("itemTitle")}
         _hover={{ borderColor: theme.colors.grey["0"] }}
         _placeholder={{ color: theme.colors.grey["100"] }}
       />
       <InputRightElement
-        top="unset"
         right="10px"
+        top="unset"
         children={
           <Flex
-            cursor="pointer"
-            bg={theme.colors.primaryPalette.primary}
-            h="40px"
-            w="50px"
-            borderRadius="8px"
             alignItems="center"
+            as="button"
+            bg={theme.colors.primaryPalette.primary}
+            borderRadius="8px"
+            cursor="pointer"
+            h="40px"
             justifyContent="center"
+            w="50px"
             _hover={{ bg: theme.colors.primaryPalette["primary.50"] }}
-            onClick={handleSearch}
           >
             <FaSearch color="white" />
           </Flex>
