@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
 import { Redirect, Route as ReactRoute, RouteProps } from "react-router-dom";
-import { useProvider } from "../providers/UserContext";
+import { useUserProvider } from "../providers/UserContext";
 
 interface Props extends RouteProps {
   isPrivate?: boolean;
@@ -12,7 +12,7 @@ export const Route = ({
   component: Component,
   ...rest
 }: Props) => {
-  const { accessToken } = useProvider();
+  const { accessToken } = useUserProvider();
   return (
     <ReactRoute
       {...rest}

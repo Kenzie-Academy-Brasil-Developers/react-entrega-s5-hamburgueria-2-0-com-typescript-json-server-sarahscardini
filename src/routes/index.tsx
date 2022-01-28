@@ -4,10 +4,10 @@ import { NotFound } from "../pages/NotFound";
 import { Route } from "./Route";
 import { Signup } from "../pages/Signup";
 import { Switch } from "react-router-dom";
-import { useProvider } from "../providers/UserContext";
+import { useUserProvider } from "../providers/UserContext";
 
 export const Routes = () => {
-  const { accessToken } = useProvider();
+  const { accessToken } = useUserProvider();
 
   return (
     <Switch>
