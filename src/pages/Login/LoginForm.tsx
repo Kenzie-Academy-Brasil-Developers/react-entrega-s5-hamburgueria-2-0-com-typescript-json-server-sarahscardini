@@ -30,33 +30,33 @@ export const LoginForm = ({
 
   return (
     <Grid
+      alignContent="space-around"
       as="form"
+      border={`2px solid ${theme.colors.grey["0"]}`}
+      borderRadius="5px"
+      boxShadow="0px 0px 30px -20px rgba(0, 0, 0, 0.25)"
+      h="70vh"
+      maxH="460px"
+      maxW="500px"
+      minHeight="460px"
       onSubmit={handleSignIn}
       padding="15px 20px"
-      border={`2px solid ${theme.colors.grey["0"]}`}
-      boxShadow="0px 0px 30px -20px rgba(0, 0, 0, 0.25)"
-      borderRadius="5px"
-      maxW="500px"
-      maxH="460px"
-      minHeight="460px"
       w={["100%", "100%", "48vw", "48vw"]}
-      h="70vh"
-      alignContent="space-around"
     >
       <Heading as="h2" fontSize="18px">
         Login
       </Heading>
       <VStack mt="4" spacing="4">
         <Input
-          {...register("email")}
           error={errors.email}
           placeholder="Email"
           type="email"
+          {...register("email")}
         />
         <Input
+          error={errors.password}
           placeholder="Senha"
           type="password"
-          error={errors.password}
           {...register("password")}
         />
       </VStack>
@@ -74,10 +74,10 @@ export const LoginForm = ({
         </Button>
         <Text
           color={theme.colors.grey["300"]}
-          textAlign="center"
           fontSize="14px"
-          padding="10px 0"
           lineHeight="1.1rem"
+          padding="10px 0"
+          textAlign="center"
         >
           Crie sua conta para saborear muitas delícias e matar sua fome!
         </Text>

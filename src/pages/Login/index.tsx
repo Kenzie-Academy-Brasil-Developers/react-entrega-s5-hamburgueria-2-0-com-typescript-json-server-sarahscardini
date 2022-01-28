@@ -2,7 +2,7 @@ import { Flex } from "@chakra-ui/react";
 import { LoginForm } from "./LoginForm";
 import { LoginInfo } from "./LoginInfo";
 import { useForm } from "react-hook-form";
-import { useProvider } from "../../providers/UserContext";
+import { useUserProvider } from "../../providers/UserContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -26,7 +26,7 @@ export const Login = () => {
     handleSubmit,
   } = useForm<SignInData>({ resolver: yupResolver(formSchema) });
 
-  const { signIn } = useProvider();
+  const { signIn } = useUserProvider();
 
   const handleSignIn = (data: SignInData) => signIn(data);
 
