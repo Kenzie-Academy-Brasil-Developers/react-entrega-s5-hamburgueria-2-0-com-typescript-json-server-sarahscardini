@@ -1,7 +1,7 @@
 import { Box, Tooltip } from "@chakra-ui/react";
-import { useState } from "react";
 import { IconType } from "react-icons/lib";
 import { theme } from "../../styles/theme";
+import { useState } from "react";
 
 interface IconProps {
   icon: IconType;
@@ -31,11 +31,11 @@ export const IconBase = ({
 
   return (
     <Tooltip
-      hasArrow
-      placement="bottom"
-      label={label}
       bg="white"
       color="gray.800"
+      hasArrow
+      label={label}
+      placement="bottom"
     >
       <Box>
         <Icon
@@ -50,9 +50,9 @@ export const IconBase = ({
           }
           cursor="pointer"
           fontSize="20px"
-          onMouseOver={() => setIsHover(true)}
-          onMouseOut={() => setIsHover(false)}
           onClick={onClick}
+          onMouseOut={() => setIsHover(false)}
+          onMouseOver={() => setIsHover(true)}
         />
       </Box>
     </Tooltip>
