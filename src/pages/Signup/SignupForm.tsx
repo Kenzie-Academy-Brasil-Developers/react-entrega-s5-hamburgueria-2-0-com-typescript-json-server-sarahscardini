@@ -32,31 +32,31 @@ export const SigupForm = ({
 
   return (
     <Grid
+      alignContent="space-evenly"
       as="form"
+      border={`2px solid ${theme.colors.grey["0"]}`}
+      borderRadius="5px"
+      boxShadow="0px 0px 30px -20px rgba(0, 0, 0, 0.25)"
+      h="70vh"
+      maxH="527px"
+      maxW="500px"
+      minHeight="527px"
       onSubmit={handleSignUp}
       padding={["10px 15px", "10px 15px", "15px 20px", "15px 20px"]}
-      border={`2px solid ${theme.colors.grey["0"]}`}
-      boxShadow="0px 0px 30px -20px rgba(0, 0, 0, 0.25)"
-      borderRadius="5px"
-      maxW="500px"
-      maxH="527px"
-      minHeight="527px"
       w={["100%", "100%", "48vw", "48vw"]}
-      h="70vh"
-      alignContent="space-evenly"
     >
       <Box display="inline-flex" justifyContent="space-between">
         <Heading as="h2" fontSize="18px">
           Cadastro
         </Heading>
         <Text
+          _hover={{ color: theme.colors.grey["600"] }}
           color={theme.colors.grey["300"]}
+          cursor="pointer"
           fontSize="14px"
+          onClick={() => history.push("/")}
           textDecor="underline"
           w="fit-content"
-          _hover={{ color: theme.colors.grey["600"] }}
-          onClick={() => history.push("/")}
-          cursor="pointer"
         >
           Retornar para o login
         </Text>
@@ -64,29 +64,29 @@ export const SigupForm = ({
       <VStack spacing="4">
         <Input placeholder="Nome" error={errors.name} {...register("name")} />
         <Input
+          error={errors.email}
           placeholder="Email"
           type="email"
-          error={errors.email}
           {...register("email")}
         />
         <Input
+          error={errors.password}
           placeholder="Senha"
           type="password"
-          error={errors.password}
           {...register("password")}
         />
         <Input
+          error={errors.confirmPass}
           placeholder="Confirmar Senha"
           type="password"
-          error={errors.confirmPass}
           {...register("confirmPass")}
         />
         <Button
-          type="submit"
           bg={theme.colors.grey["0"]}
           borderRadius="8px"
           color={theme.colors.grey["300"]}
           h="60px"
+          type="submit"
           w="100%"
           _hover={{
             bg: theme.colors.grey["300"],

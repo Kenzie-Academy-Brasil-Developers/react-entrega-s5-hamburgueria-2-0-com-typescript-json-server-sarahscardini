@@ -7,9 +7,9 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { FiShoppingBag } from "react-icons/fi";
-import Logo from "../../assets/logo.svg";
 import { theme } from "../../styles/theme";
 import Ellipses from "../../assets/ellipses.svg";
+import Logo from "../../assets/logo.svg";
 
 export const SignupInfo = () => {
   const isWideVersion = useBreakpointValue({
